@@ -95,42 +95,42 @@ var Tween = {
     },
     Elastic: {
         easeIn: function(t, b, c, d, a, p) {
-			var s;
+            var s;
             if (t==0) return b;
-			if ((t /= d) == 1) return b + c;
-			if (typeof p == "undefined") p = d * .3;
+            if ((t /= d) == 1) return b + c;
+            if (typeof p == "undefined") p = d * .3;
             if (!a || a < Math.abs(c)) {
-				s = p / 4;
-				a = c;
-			} else {
-				s = p / (2 * Math.PI) * Math.asin(c / a);
-			}
+                s = p / 4;
+                a = c;
+            } else {
+                s = p / (2 * Math.PI) * Math.asin(c / a);
+            }
             return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
         },
         easeOut: function(t, b, c, d, a, p) {
-			var s;
+            var s;
             if (t==0) return b;
-			if ((t /= d) == 1) return b + c;
-			if (typeof p == "undefined") p = d * .3;
+            if ((t /= d) == 1) return b + c;
+            if (typeof p == "undefined") p = d * .3;
             if (!a || a < Math.abs(c)) {
-				a = c; 
-				s = p / 4;
-			} else {
-				s = p/(2*Math.PI) * Math.asin(c/a);
-			}
+                a = c; 
+                s = p / 4;
+            } else {
+                s = p/(2*Math.PI) * Math.asin(c/a);
+            }
             return (a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b);
         },
         easeInOut: function(t, b, c, d, a, p) {
-			var s;
+            var s;
             if (t==0) return b;
-			if ((t /= d / 2) == 2) return b+c;
-			if (typeof p == "undefined") p = d * (.3 * 1.5);
+            if ((t /= d / 2) == 2) return b+c;
+            if (typeof p == "undefined") p = d * (.3 * 1.5);
             if (!a || a < Math.abs(c)) {
-				a = c; 
-				s = p / 4;
-			} else {
-				s = p / (2  *Math.PI) * Math.asin(c / a);
-			}
+                a = c; 
+                s = p / 4;
+            } else {
+                s = p / (2  *Math.PI) * Math.asin(c / a);
+            }
             if (t < 1) return -.5 * (a * Math.pow(2, 10* (t -=1 )) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
             return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p ) * .5 + c + b;
         }
@@ -167,10 +167,10 @@ var Tween = {
         },
         easeInOut: function(t, b, c, d) {
             if (t < d / 2) {
-				return Tween.Bounce.easeIn(t * 2, 0, c, d) * .5 + b;
-			} else {
-				return Tween.Bounce.easeOut(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
-			}
+                return Tween.Bounce.easeIn(t * 2, 0, c, d) * .5 + b;
+            } else {
+                return Tween.Bounce.easeOut(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
+            }
         }
     }
 }
