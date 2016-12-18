@@ -93,7 +93,7 @@ Math.animation = function (from, to, duration, easing, callback) {
     // 运动
     var step = function() {
         // 当前的运动位置
-        var value = fnGetValue(start, from, to, during);
+        var value = fnGetValue(start, from, to - from, during);
         
         // 时间递增
         start++;
