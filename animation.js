@@ -103,7 +103,7 @@ Math.animation = function (from, to, duration, easing, callback) {
             requestAnimationFrame(step);
         } else {
             // 动画结束，这里可以插入回调...
-            options.callback(false);
+            options.callback(to, true);
         }
     };
     // 开始执行动画
