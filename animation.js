@@ -67,12 +67,12 @@ Math.animation = function (from, to, duration, easing, callback) {
     setOptions(duration);
     setOptions(easing);
     setOptions(callback);
-    
+	
     // requestAnimationFrame的兼容处理
     if (!window.requestAnimationFrame) {
-        requestAnimationFrame = function(fn) {
+        requestAnimationFrame = function (fn) {
             setTimeout(fn, 17);
-        };    
+        };
     }
     
     // 算法需要的几个变量
@@ -81,14 +81,20 @@ Math.animation = function (from, to, duration, easing, callback) {
     var during = Math.ceil(options.duration / 17);
     
     // 当前动画算法
+	// 确保首字母大写
+	options.easing = options.easing.slice(0, 1).toUpperCase() + options.easing.slice(1);
     var arrKeyTween = options.easing.split('.');
     var fnGetValue;
     
     if (arrKeyTween.length == 1) {
         fnGetValue = tween[arrKeyTween[0]];
     } else if (arrKeyTween.length == 2) {
-        fnGetValue = tween[arrKeyTween[0]][arrKeyTween[1]];
+        fnGetValue = tween[arrKeyTween[0]] && tween[arrKeyTween[0]][arrKeyTween[1]];
     }
+	if (isFunction(fnGetValue) == false) {
+		console.error('没有找到名为"'+ options.easing +'"的动画算法');
+		return;	
+	}
     
     // 运动
     var step = function() {
