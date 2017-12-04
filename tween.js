@@ -7,7 +7,10 @@
  * you can visit 'http://easings.net/zh-cn' to get effect
 */
 var Tween = {
-    Linear: function(t, b, c, d) { return c*t/d + b; },
+    Linear: function(t, b, c, d) { 
+        // return c*t/d + b; 
+        return (c-b)*t/d + b;
+    },
     Quad: {
         easeIn: function(t, b, c, d) {
             return c * (t /= d) * t + b;
