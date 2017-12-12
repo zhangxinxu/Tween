@@ -1,3 +1,9 @@
+/**
+ * @author zhangxinxu(.com)
+ * @description 让Tween.js缓动算法更容易理解和使用
+                需要先引入Tween.js - https://github.com/zhangxinxu/Tween/blob/master/tween.js
+ * @link https://github.com/zhangxinxu/Tween/blob/master/animation.js
+ */
 // 对运动方法进行封装
 Math.animation = function (from, to, duration, easing, callback) {
     var isUndefined = function (obj) {
@@ -12,7 +18,7 @@ Math.animation = function (from, to, duration, easing, callback) {
     var isString = function(obj) {
         return typeof obj == 'string';
     };
-    
+
     // 转换成毫秒
     var toMillisecond = function(obj) {
         if (isNumber(obj)) {
@@ -29,24 +35,24 @@ Math.animation = function (from, to, duration, easing, callback) {
         }
         return -1;
     };
-    
+
     if (!isNumber(from) || !isNumber(to)) {
         if (window.console) {
-            console.error('from和to两个参数必须且为数值');    
+            console.error('from和to两个参数必须且为数值');
         }
         return 0;
     }
-    
+
     // 缓动算法
     var tween = Math.tween || window.Tween;
-    
+
     if (!tween) {
         if (window.console) {
-            console.error('缓动算法函数缺失');    
+            console.error('缓动算法函数缺失');
         }
         return 0;
     }
-    
+
     // duration, easing, callback均为可选参数
     // 而且顺序可以任意
     var options = {
@@ -54,7 +60,7 @@ Math.animation = function (from, to, duration, easing, callback) {
         easing: 'Linear',
         callback: function() {}
     };
-    
+
     var setOptions = function(obj) {
         if (isFunction(obj)) {
             options.callback = obj;
@@ -67,25 +73,25 @@ Math.animation = function (from, to, duration, easing, callback) {
     setOptions(duration);
     setOptions(easing);
     setOptions(callback);
-	
+
     // requestAnimationFrame的兼容处理
     if (!window.requestAnimationFrame) {
         requestAnimationFrame = function (fn) {
             setTimeout(fn, 17);
         };
     }
-    
+
     // 算法需要的几个变量
     var start = 0;
     // during根据设置的总时间计算
     var during = Math.ceil(options.duration / 17);
-    
+
     // 当前动画算法
 	// 确保首字母大写
 	options.easing = options.easing.slice(0, 1).toUpperCase() + options.easing.slice(1);
     var arrKeyTween = options.easing.split('.');
     var fnGetValue;
-    
+
     if (arrKeyTween.length == 1) {
         fnGetValue = tween[arrKeyTween[0]];
     } else if (arrKeyTween.length == 2) {
@@ -93,14 +99,14 @@ Math.animation = function (from, to, duration, easing, callback) {
     }
 	if (isFunction(fnGetValue) == false) {
 		console.error('没有找到名为"'+ options.easing +'"的动画算法');
-		return;	
+		return;
 	}
-    
+
     // 运动
     var step = function() {
         // 当前的运动位置
         var value = fnGetValue(start, from, to - from, during);
-        
+
         // 时间递增
         start++;
         // 如果还没有运动到位，继续
