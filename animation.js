@@ -77,7 +77,12 @@ Math.animation = function (from, to, duration, easing, callback) {
     // requestAnimationFrame的兼容处理
     if (!window.requestAnimationFrame) {
         requestAnimationFrame = function (fn) {
-            setTimeout(fn, 17);
+            return setTimeout(fn, 17);
+        };
+    }
+    if (!window.cancelAnimationFrame) {
+        cancelAnimationFrame = function (id) {
+            clearTimeout(id);
         };
     }
 
@@ -85,6 +90,8 @@ Math.animation = function (from, to, duration, easing, callback) {
     var start = 0;
     // during根据设置的总时间计算
     var during = Math.ceil(options.duration / 17);
+    // 动画请求帧
+    var req = null;
 
     // 当前动画算法
 	// 确保首字母大写
@@ -112,7 +119,7 @@ Math.animation = function (from, to, duration, easing, callback) {
         // 如果还没有运动到位，继续
         if (start <= during) {
             options.callback(value);
-            requestAnimationFrame(step);
+            req = requestAnimationFrame(step);
         } else {
             // 动画结束，这里可以插入回调...
             options.callback(to, true);
@@ -120,4 +127,8 @@ Math.animation = function (from, to, duration, easing, callback) {
     };
     // 开始执行动画
     step();
+
+    return function () {
+        return req;
+    };
 };

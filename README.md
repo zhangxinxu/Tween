@@ -24,3 +24,9 @@ Tween.js
 </li>
 </ul>
 
+<code>Math.animation</code>返回一个函数，执行这个函数可以返回当前动画使用的请求动画帧，使用<code>cancelAnimationFrame</code>方法可以停止我们的动画。
+
+例如：
+<pre>var fnReq = Math.animation(100, 200, 3000);
+// 执行下面语句停止动画
+cancelAnimationFrame(fnReq());</pre>
