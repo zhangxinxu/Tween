@@ -8,8 +8,7 @@
 */
 var Tween = {
     Linear: function(t, b, c, d) { 
-        // return c*t/d + b; 
-        return (c-b)*t/d + b;
+        return c * t / d + b; 
     },
     Quad: {
         easeIn: function(t, b, c, d) {
