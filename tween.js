@@ -4,7 +4,7 @@
  * b: beginning value（初始值）；
  * c: change in value（变化量）；
  * d: duration（持续时间）。
- * you can visit 'http://easings.net/zh-cn' to get effect
+ * you can visit 'https://www.zhangxinxu.com/study/201612/how-to-use-tween-js.html' to get effect
 */
 var Tween = {
     Linear: function(t, b, c, d) { 
